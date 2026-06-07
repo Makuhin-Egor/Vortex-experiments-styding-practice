@@ -1,0 +1,10 @@
+Test Name,App,Scaling,Cores,Cache,L1 Size,Cycles,IPC
+vecadd_strong_1c_L2,vecadd,strong,1,L2,16K,537133,0.921768
+vecadd_strong_1c_noL2,vecadd,strong,1,No L2,16K,622459,0.795413
+vecadd_strong_2c_L2,vecadd,strong,2,L2,16K,535113,0.93196
+vecadd_strong_2c_noL2,vecadd,strong,2,No L2,16K,605800,0.823216
+vecadd_strong_4c_L2,vecadd,strong,4,L2,16K,543280,0.931174
+vecadd_strong_4c_L2L3,vecadd,strong,4,L2+L3,16K,543755,0.93036
+vecadd_strong_4c_noL2,vecadd,strong,4,No L2,16K,588897,0.859043
+vecadd_weak_2c_noL2,vecadd,weak,2,No L2,16K,1231430,0.804125
+vecadd_weak_4c_noL2,vecadd,weak,4,No L2,16K,2381645,0.831546

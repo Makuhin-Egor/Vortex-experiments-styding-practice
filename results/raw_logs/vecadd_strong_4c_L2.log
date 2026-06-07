@@ -1,0 +1,83 @@
+CONFIGS=-DNUM_CORES=4 -DL2_ENABLE
+Running: CONFIGS="-DNUM_CORES=4 -DL2_ENABLE" make -C ./ci/../runtime/simx > /dev/null
+In file included from /home/egor/vortex/sim/simx/dtm/debug_module.cpp:1:
+/home/egor/vortex/sim/simx/dtm/debug_module.h: In constructor ‘DebugModule::DebugModule(vortex::Emulator*, size_t)’:
+/home/egor/vortex/sim/simx/dtm/debug_module.h:267:10: warning: ‘DebugModule::resumereq_prev’ will be initialized after [-Wreorder]
+  267 |     bool resumereq_prev;
+      |          ^~~~~~~~~~~~~~
+/home/egor/vortex/sim/simx/dtm/debug_module.h:254:14: warning:   ‘uint32_t DebugModule::data1’ [-Wreorder]
+  254 |     uint32_t data1;  // DATA1 register (address 0x5)
+      |              ^~~~~
+/home/egor/vortex/sim/simx/dtm/debug_module.cpp:37:1: warning:   when initialized here [-Wreorder]
+   37 | DebugModule::DebugModule(vortex::Emulator* emulator, size_t mem_size)
+      | ^~~~~~~~~~~
+/home/egor/vortex/sim/simx/dtm/debug_module.h:274:18: warning: ‘DebugModule::access_mem_addr’ will be initialized after [-Wreorder]
+  274 |     vortex::Word access_mem_addr;
+      |                  ^~~~~~~~~~~~~~~
+/home/egor/vortex/sim/simx/dtm/debug_module.h:184:10: warning:   ‘bool DebugModule::halt_requested_’ [-Wreorder]
+  184 |     bool halt_requested_;
+      |          ^~~~~~~~~~~~~~~
+/home/egor/vortex/sim/simx/dtm/debug_module.cpp:37:1: warning:   when initialized here [-Wreorder]
+   37 | DebugModule::DebugModule(vortex::Emulator* emulator, size_t mem_size)
+      | ^~~~~~~~~~~
+/home/egor/vortex/sim/simx/dtm/debug_module.cpp: In member function ‘void DebugModule::execute_command(uint32_t)’:
+/home/egor/vortex/sim/simx/dtm/debug_module.cpp:534:98: warning: left shift count >= width of type [-Wshift-count-overflow]
+  534 |                     val = static_cast<vortex::Word>(data0()) | (static_cast<vortex::Word>(data1) << 32);
+      |                                                                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~
+/home/egor/vortex/sim/simx/dtm/debug_module.cpp:544:55: warning: right shift count >= width of type [-Wshift-count-overflow]
+  544 |                     data1 = static_cast<uint32_t>(val >> 32);
+      |                                                   ~~~~^~~~~
+/home/egor/vortex/sim/simx/dtm/debug_module.cpp:615:62: warning: left shift count >= width of type [-Wshift-count-overflow]
+  615 |                 mem_addr = (static_cast<vortex::Word>(data3) << 32) | static_cast<vortex::Word>(data2);
+      |                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~
+/home/egor/vortex/sim/simx/dtm/debug_module.cpp:626:62: warning: left shift count >= width of type [-Wshift-count-overflow]
+  626 |                 mem_addr = (static_cast<vortex::Word>(data1) << 32) | static_cast<vortex::Word>(data0());
+      |                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~
+/home/egor/vortex/sim/simx/dtm/debug_module.cpp:655:105: warning: left shift count >= width of type [-Wshift-count-overflow]
+  655 |                     write_data = static_cast<vortex::Word>(data0()) | (static_cast<vortex::Word>(data1) << 32);
+      |                                                                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~
+/home/egor/vortex/sim/simx/dtm/debug_module.cpp:701:64: warning: right shift count >= width of type [-Wshift-count-overflow]
+  701 |                         data1 = static_cast<uint32_t>(read_val >> 32);
+      |                                                       ~~~~~~~~~^~~~~
+/home/egor/vortex/sim/simx/dtm/debug_module.cpp:720:64: warning: right shift count >= width of type [-Wshift-count-overflow]
+  720 |                         data3 = static_cast<uint32_t>(new_addr >> 32);
+      |                                                       ~~~~~~~~~^~~~~
+/home/egor/vortex/sim/simx/dtm/debug_module.cpp:732:64: warning: right shift count >= width of type [-Wshift-count-overflow]
+  732 |                         data1 = static_cast<uint32_t>(new_addr >> 32);
+      |                                                       ~~~~~~~~~^~~~~
+/home/egor/vortex/sim/simx/dtm/debug_module.cpp: In member function ‘vortex::Word DebugModule::read_register(uint16_t)’:
+/home/egor/vortex/sim/simx/dtm/debug_module.cpp:836:17: warning: comparison is always true due to limited range of data type [-Wtype-limits]
+  836 |     if (regaddr >= 0x0000 && regaddr <= 0x0FFF) {
+      |         ~~~~~~~~^~~~~~~~~
+/home/egor/vortex/sim/simx/dtm/debug_module.cpp: In member function ‘void DebugModule::write_register(uint16_t, vortex::Word)’:
+/home/egor/vortex/sim/simx/dtm/debug_module.cpp:885:38: warning: comparison is always true due to limited range of data type [-Wtype-limits]
+  885 |     if (regaddr >= 0xC000 && regaddr <= 0xFFFF) {
+      |                              ~~~~~~~~^~~~~~~~~
+Running: OPTS="-n16384" make -C "./ci/../tests/regression/vecadd" run-simx
+make: вход в каталог «/home/egor/vortex/build/tests/regression/vecadd»
+LD_LIBRARY_PATH=/home/egor/vortex/build/runtime: VORTEX_DRIVER=simx   ./vecadd -n16384
+open device connection
+number of points: 16384
+data type: float
+buffer size: 65536 bytes
+allocate device memory
+dev_src0=0x10000
+dev_src1=0x20000
+dev_dst=0x30000
+allocate host buffers
+upload source buffer0
+upload source buffer1
+Upload kernel binary
+upload kernel argument
+start device
+wait for completion
+download destination buffer
+verify result
+cleanup
+PERF: core0: instrs=126472, cycles=543161, IPC=0.232844
+PERF: core1: instrs=126472, cycles=543280, IPC=0.232793
+PERF: core2: instrs=126472, cycles=542479, IPC=0.233137
+PERF: core3: instrs=126472, cycles=543253, IPC=0.232805
+PERF: instrs=505888, cycles=543280, IPC=0.931174
+PASSED!
+make: выход из каталога «/home/egor/vortex/build/tests/regression/vecadd»
