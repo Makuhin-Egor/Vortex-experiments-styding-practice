@@ -29,7 +29,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
+      - name: Install ShellCheck
+        run: sudo apt-get install -y shellcheck
+        
       - name: Run ShellCheck
-        uses: ludeeus/action-shellcheck@master
-        with:
-          scandir: './scripts'
+        run: shellcheck scripts/*.sh
