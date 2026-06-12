@@ -1,0 +1,10 @@
+[project]
+name = "vortex-experiments-styding-practice"
+version = "0.1.0"
+description = "Research pipeline for Vortex GPGPU architecture scaling and cache hierarchy analysis"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "matplotlib>=3.11.0",
+    "pandas>=3.0.3",
+]
