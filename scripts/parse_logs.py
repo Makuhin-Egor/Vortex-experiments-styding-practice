@@ -33,8 +33,10 @@ def parse_logs():
                     scaling = parts[1]
                     cores = parts[2].replace('c', '')
                     cache = "No L2"
-                    if "L2L3" in parts: cache = "L2+L3"
-                    elif "L2" in parts: cache = "L2"
+                    if "L2L3" in parts: 
+                        cache = "L2+L3"
+                    elif "L2" in parts: 
+                        cache = "L2"
                     
                     l1_size = "16K"
 

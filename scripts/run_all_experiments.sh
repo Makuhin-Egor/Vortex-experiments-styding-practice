@@ -27,7 +27,7 @@ run_test() {
     local args=$5
 
     echo "Running: $test_name..."
-    ./ci/blackbox.sh --cores=$cores $cache_flags --app=$app --args="$args" > "$LOG_DIR/${test_name}.log" 2>&1
+        ./ci/blackbox.sh --cores="$cores" "$cache_flags" --app="$app" --args="$args" > "$LOG_DIR/${test_name}.log" 2>&1
 }
 
 # -------------------------------------
