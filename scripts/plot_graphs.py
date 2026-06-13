@@ -22,7 +22,7 @@ def plot_and_save():
     plt.grid(True, linestyle='--', alpha=0.7)
     plt.legend()
     plt.tight_layout()
-    plt.savefig(os.path.join(PLOT_DIR, "1_strong_scaling_vecadd.png"), dpi=300)
+    plt.savefig(os.path.join(PLOT_DIR, "1_strong_scaling_vecadd.pdf"), bbox_inches='tight')
     plt.close()
 
     # -------------------------
@@ -38,7 +38,7 @@ def plot_and_save():
     plt.grid(True, linestyle='--', alpha=0.7)
     plt.legend()
     plt.tight_layout()
-    plt.savefig(os.path.join(PLOT_DIR, "2_strong_scaling_sgemm.png"), dpi=300)
+    plt.savefig(os.path.join(PLOT_DIR, "2_strong_scaling_sgemm.pdf"), bbox_inches='tight')
     plt.close()
 
     # -------------------------
@@ -54,7 +54,7 @@ def plot_and_save():
     plt.ylabel('Такты (Чем меньше, тем лучше)')
     plt.grid(True, axis='y', linestyle='--', alpha=0.7)
     plt.tight_layout()
-    plt.savefig(os.path.join(PLOT_DIR, "3_cache_hierarchy_impact.png"), dpi=300)
+    plt.savefig(os.path.join(PLOT_DIR, "3_cache_hierarchy_impact.pdf"), bbox_inches='tight')
     plt.close()
 
     # -------------------------
@@ -74,7 +74,7 @@ def plot_and_save():
     plt.grid(True, linestyle='--', alpha=0.7)
     plt.legend()
     plt.tight_layout()
-    plt.savefig(os.path.join(PLOT_DIR, "4_weak_scaling.png"), dpi=300)
+    plt.savefig(os.path.join(PLOT_DIR, "4_weak_scaling.pdf"), bbox_inches='tight')
     plt.close()
 
     print(f"4 графика успешно сохранены в {PLOT_DIR}")
