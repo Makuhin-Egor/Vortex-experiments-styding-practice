@@ -93,7 +93,7 @@ uv run python3 scripts/plot_graphs.py
 
 Включение **L2 (1 МБ)** для одного ядра `vecadd` дало **+15%** ускорения, но на **4 ядрах** привело к **деградации производительности**. **L3 (2 МБ)** не дал прироста.
 
-> **Анализ:** `vecadd` лишён временной локальности. Потоковые данные заполняют (*pollute*) L2/L3 без выигрыша от попаданий, а на множестве ядер создают конкуренцию за арбитраж шины L2 (*Contention*) и конфликты по наборам кэша (*Cache Set Conflicts*). Для контраста, `sgemm` обладает временной локальностью, но также ограничен задержками доступа к L2.
+> **Анализ:** vecadd лишён временной локальности. Потоковые данные заполняют (pollute) L2/L3 без выигрыша от попаданий. Поскольку L1 кэш приватен для каждого ядра, разделяемый L2 выступает первой точкой сериализации доступа, где на множестве ядер возникает конкуренция за арбитраж (Contention) и конфликты по наборам кэша (Cache Set Conflicts). Для контраста, sgemm обладает временной локальностью, но также ограничен задержками доступа к L2.
 
 ---
 
@@ -148,12 +148,6 @@ uv run python3 scripts/plot_graphs.py
 ├── .github/
 │   └── workflows/
 │       └── ci.yml               # GitHub Actions: Ruff linter & ShellCheck
-├── Egor_Makukhin/               # Исходники отчета по практике (LaTeX)
-│   ├── Egor_Makukhin_report.tex
-│   ├── 1_strong_scaling_vecadd.png
-│   ├── 2_strong_scaling_sgemm.png
-│   ├── 3_cache_hierarchy_impact.png
-│   └── 4_weak_scaling.png
 ├── scripts/
 │   ├── run_all_experiments.sh   # Автоматический прогон симулятора
 │   ├── parse_logs.py            # Извлечение метрик из логов в CSV
@@ -161,7 +155,7 @@ uv run python3 scripts/plot_graphs.py
 ├── results/
 │   ├── raw_logs/                # Выходные логи Vortex simx
 │   ├── csv/                     # Структурированные данные (experiment_data.csv)
-│   └── plots/                   # Сгенерированные графики (.png)
+│   └── plots/                   # Сгенерированные графики (.pdf)
 ├── LICENSE                      # Лицензия MIT
 ├── .python-version              # Зафиксированная версия Python (управляется uv)
 ├── pyproject.toml               # Конфигурация uv и зависимости Python
